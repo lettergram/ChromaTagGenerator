@@ -1,6 +1,8 @@
 ChromaTag Constructor
 =======
 
-Takes input matrix (should be an AprilTag for the moment) and builds a ChromaTag, with much higher robustness.
+Takes input matrix (should be an AprilTag for the moment) and builds a ChromaTag.
 
-Will eventually add robustness vs data model
+Currently, the system is designed to produce a more robust tag.
+
+I will eventually add robustness vs data model
