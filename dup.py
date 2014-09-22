@@ -11,7 +11,7 @@
 '''
 
 import numpy as np
-# from PIL import Image
+from PIL import Image
 
 
 # TODO: CHECK COLORS
@@ -22,11 +22,13 @@ import numpy as np
 # (0, 1) - (a-, b+) - lime   (  0, 255,   0)
 # (0, 0) - (a-, b-) - teal   (  0, 255, 255)
 
-o = (100, 255, 160)
-p = (255, 0, 255)
-l = (0, 255, 0)
-t = (0, 255, 255)
-colors = [o, p, l, t]
+orange = (100, 255, 160)
+purple = (255, 0, 255)
+lime = (0, 255, 0)
+teal = (0, 255, 255)
+black = (0, 0, 0)
+white = (255, 255, 255)
+colors = [orange, purple, lime, teal]
 
 '''
 Flips and encodes!
@@ -76,22 +78,44 @@ def image2Matrix(imageMatrix):
 
 
 '''
+  Creates an image from a matrix
+'''
 def generateImage(name, matrix):
 
-    img = Image.new("RGB", (len(matrix), len(matrix)), (255, 255, 255))
-    scale = 10
-    for i in len(matrix):
-        for j in len(matrix):
-            for k in len(size):
-                # TODO, check works
-                img.putpixel((i*scale + k, j*scale + k), colors[matrix[i][j]])
+    scale = 100
+    size = len(matrix) * scale
+    img = Image.new("RGB", (size, size), (255, 255, 255))
+    for i in range(len(matrix)):
+        for j in range(len(matrix)):
+            for k in range(scale):
+                for t in range(scale):
+                    img.putpixel((i*scale + t, j*scale + k), matrix[i][j])
+
     img.save(name, "PNG")
+
+
 '''
+Creates a black and white image
+'''
+def generateBWMatrix(matrix):
+
+    imageMatrix = []
+    i = 0
+    
+    for row in matrix:
+        imageMatrix.append([])
+        for entry in row:
+            if entry is 1:
+                imageMatrix[i].append(black)
+            else:
+                imageMatrix[i].append(white)
+        i += 1
+    return imageMatrix
 
 '''
 Converts the tuples into pixel matrix
 '''
-def generateImageMatrix(matrix):
+def generateColorMatrix(matrix):
     
     imageMatrix = []
     i = 0
@@ -110,7 +134,6 @@ def generateImageMatrix(matrix):
                 else:
                     imageMatrix[i].append(colors[3])
         i += 1
-
     return imageMatrix
 
 
@@ -130,13 +153,18 @@ def runTest(name, test):
     print '\n-- Beginning Test %s! --\n' % (name)
     print 'input matrix:'
     printMatrix(test)
+    print 'Genearting Input Image...'
+    generateImage(name + '-input', generateBWMatrix(test))
     print 'tuple matrix:'
     printMatrix(encode(test))
     print 'coded matrix:'
-    printMatrix(generateImageMatrix(encode(test)))
+    printMatrix(generateColorMatrix(encode(test)))
     print 'tuple matrix:'
-    printMatrix(image2Matrix(generateImageMatrix(encode(test))))
-    if encode(test) == image2Matrix(generateImageMatrix(encode(test))):
+    printMatrix(image2Matrix(generateColorMatrix(encode(test))))
+    print 'Generating Output Image...'
+    generateImage(name + '-output', generateColorMatrix(encode(test)))
+
+    if encode(test) == image2Matrix(generateColorMatrix(encode(test))):
         print '\nOutput == Input!'
         print 'Successfully, Completed Test %s!\n\n' % (name)
     else:
