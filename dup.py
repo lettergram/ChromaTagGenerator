@@ -17,14 +17,14 @@ from PIL import Image
 # TODO: ENSURE COLORS ARE OPTIMAL
 # AprilTag - (a, b) - colors
 
-# (1, 1) - (a+, b+) - Orange (100, 255, 160)
+# (1, 1) - (a+, b+) - Orange (255, 170, 0)
 # (1, 0) - (a+, b-) - purple (255,   0, 255)
-# (0, 1) - (a-, b+) - lime   (  0, 255,   0)
+# (0, 1) - (a-, b+) - lime   (100, 255, 160)
 # (0, 0) - (a-, b-) - teal   (  0, 255, 255)
 
 orange = (255, 170, 0)
 purple = (255, 0, 255)
-lime = (60, 255, 30)
+lime = (100, 255, 160)
 teal = (0, 255, 255)
 
 black = (0, 0, 0)
