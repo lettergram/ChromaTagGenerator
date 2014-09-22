@@ -11,9 +11,22 @@
 '''
 
 import numpy as np
+# from PIL import Image
 
-# (1, 1), (1, 0), (0, 1), (0, 0)
-colors = [0, 1, 2, 3]
+
+# TODO: CHECK COLORS
+# AprilTag - (a, b) - colors
+
+# (1, 1) - (a+, b+) - Orange (100, 255, 160)
+# (1, 0) - (a+, b-) - purple (255,   0, 255)
+# (0, 1) - (a-, b+) - lime   (  0, 255,   0)
+# (0, 0) - (a-, b-) - teal   (  0, 255, 255)
+
+o = (100, 255, 160)
+p = (255, 0, 255)
+l = (0, 255, 0)
+t = (0, 255, 255)
+colors = [o, p, l, t]
 
 '''
 Flips and encodes!
@@ -62,11 +75,23 @@ def image2Matrix(imageMatrix):
     return matrix
 
 
+'''
+def generateImage(name, matrix):
+
+    img = Image.new("RGB", (len(matrix), len(matrix)), (255, 255, 255))
+    scale = 10
+    for i in len(matrix):
+        for j in len(matrix):
+            for k in len(size):
+                # TODO, check works
+                img.putpixel((i*scale + k, j*scale + k), colors[matrix[i][j]])
+    img.save(name, "PNG")
+'''
 
 '''
 Converts the tuples into pixel matrix
 '''
-def generateImage(matrix):
+def generateImageMatrix(matrix):
     
     imageMatrix = []
     i = 0
@@ -108,10 +133,10 @@ def runTest(name, test):
     print 'tuple matrix:'
     printMatrix(encode(test))
     print 'coded matrix:'
-    printMatrix(generateImage(encode(test)))
+    printMatrix(generateImageMatrix(encode(test)))
     print 'tuple matrix:'
-    printMatrix(image2Matrix(generateImage(encode(test))))
-    if encode(test) == image2Matrix(generateImage(encode(test))):
+    printMatrix(image2Matrix(generateImageMatrix(encode(test))))
+    if encode(test) == image2Matrix(generateImageMatrix(encode(test))):
         print '\nOutput == Input!'
         print 'Successfully, Completed Test %s!\n\n' % (name)
     else:
