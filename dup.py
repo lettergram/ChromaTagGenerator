@@ -14,7 +14,7 @@ import numpy as np
 from PIL import Image
 
 
-# TODO: CHECK COLORS
+# TODO: ENSURE COLORS ARE OPTIMAL
 # AprilTag - (a, b) - colors
 
 # (1, 1) - (a+, b+) - Orange (100, 255, 160)
@@ -26,8 +26,10 @@ orange = (100, 255, 160)
 purple = (255, 0, 255)
 lime = (0, 255, 0)
 teal = (0, 255, 255)
+
 black = (0, 0, 0)
 white = (255, 255, 255)
+
 colors = [orange, purple, lime, teal]
 
 '''
@@ -39,9 +41,11 @@ def encode(matrix):
 
     encodedMatrix = []
     
-    # NEED TO ADD VALIDATION
-    height = len(matrix) 
-    width = len(matrix[0])
+    try:
+        height = len(matrix) 
+        width = len(matrix[0])
+    except:
+        return [[]]
 
     for i in range(height):
         newRow = []
@@ -58,9 +62,11 @@ def image2Matrix(imageMatrix):
     
     matrix = []
 
-    # NEED TO ADD VALIDATION                                                    
-    height = len(imageMatrix)
-    width = len(imageMatrix[0])
+    try:
+        height = len(imageMatrix)
+        width = len(imageMatrix[0])
+    except:
+        return [[]]
 
     for i in range(height):
         row = []
@@ -78,7 +84,7 @@ def image2Matrix(imageMatrix):
 
 
 '''
-  Creates an image from a matrix
+Creates an image from a matrix
 '''
 def generateImage(name, matrix):
 
@@ -90,7 +96,6 @@ def generateImage(name, matrix):
             for k in range(scale):
                 for t in range(scale):
                     img.putpixel((i*scale + t, j*scale + k), matrix[i][j])
-
     img.save(name, "PNG")
 
 
@@ -115,8 +120,8 @@ def generateBWMatrix(matrix):
 '''
 Converts the tuples into pixel matrix
 '''
-def generateColorMatrix(matrix):
-    
+def generateColorMatrix(matrix):    
+
     imageMatrix = []
     i = 0
 
@@ -137,8 +142,10 @@ def generateColorMatrix(matrix):
     return imageMatrix
 
 
+'''
+Prints a matrix in a decent format
+'''
 def printMatrix(matrix):
-
     for i in range(len(matrix)):
         print '\t[',
         for j in range(len(matrix[i])):
