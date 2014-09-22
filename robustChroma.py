@@ -10,7 +10,7 @@
   @Written in Python 2.7
 '''
 
-import numpy as np
+import sys
 from PIL import Image
 
 
@@ -190,3 +190,14 @@ test3 = [[0, 1, 1, 1, 0, 1], [0, 1, 0, 1, 0, 1],\
          [1, 0, 0, 1, 1, 0], [1, 1, 1, 0, 0, 0],\
          [0, 1, 1, 0, 0, 1], [1, 1, 0, 0, 1, 0]]
 runTest('#3', test3)
+
+test4 = []
+print 'Enter 6 rows, each row MUST contain 6 entries of 1s and 0s ONLY!'
+print 'EXAMPLE: 1 0 1 0 1 0'
+'''
+for i in range(6):
+    row = input('Row #%s: ' % (i))
+    row = row.split()
+    test4.append(row)
+runTest('#4', test4)
+'''
