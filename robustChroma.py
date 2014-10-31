@@ -17,15 +17,16 @@ from PIL import Image
 # TODO: ENSURE COLORS ARE OPTIMAL
 # AprilTag - (a, b) - colors
 
-# (1, 1) - (a+, b+) - Orange (255, 180,   0)
-# (1, 0) - (a+, b-) - purple (255,   0, 255)
-# (0, 1) - (a-, b+) - lime   (120, 255,   0)
-# (0, 0) - (a-, b-) - teal   (  0, 255, 255)
+# (1, 1) - (a+, b+) - orange = (241, 125, 42)
+# (1, 0) - (a+, b-) - magenta = (248, 140, 149)
+# (0, 1) - (a-, b+) - lime = (90, 205, 86)
+# (0, 0) - (a-, b-) - teal = (23, 249, 255)
 
-orange = (255, 180,   0)
-purple = (255,   0, 255)
-lime   = (120, 255,   0)
-teal   = (  0, 255, 255)
+
+orange = (241, 125, 42)
+magenta = (248, 140, 149)
+lime = (90, 205, 86)
+teal = (23, 249, 245)
 
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -38,12 +39,15 @@ Could use http://stackoverflow.com/questions/16265673/rotate-image-by-90-180-or-
 for OpenCV implementation
 '''
 def encode(matrix):
+
     encodedMatrix = []
+    
     try:
         height = len(matrix) 
         width = len(matrix[0])
     except:
         return [[]]
+
     for i in range(height):
         newRow = []
         for j in range(width):
@@ -56,12 +60,15 @@ def encode(matrix):
 Decodes encoded matrix from image
 '''
 def image2Matrix(imageMatrix):
+    
     matrix = []
+
     try:
         height = len(imageMatrix)
         width = len(imageMatrix[0])
     except:
         return [[]]
+
     for i in range(height):
         row = []
         for j in range(width):
@@ -78,9 +85,10 @@ def image2Matrix(imageMatrix):
 
 
 '''
-pCreates an image from a matrix
+Creates an image from a matrix
 '''
 def generateImage(name, matrix):
+
     scale = 100
     size = len(matrix) * scale
     img = Image.new("RGB", (size, size), (255, 255, 255))
@@ -96,8 +104,10 @@ def generateImage(name, matrix):
 Creates a black and white image
 '''
 def generateBWMatrix(matrix):
+
     imageMatrix = []
     i = 0
+    
     for row in matrix:
         imageMatrix.append([])
         for entry in row:
@@ -112,34 +122,24 @@ def generateBWMatrix(matrix):
 Converts the tuples into pixel matrix
 '''
 def generateColorMatrix(matrix):    
+
     imageMatrix = []
-    aMatrix = []
-    bMatrix = []
     i = 0
+
     for row in matrix:
         imageMatrix.append([])
-        aMatrix.append([])
-        bMatrix.append([])
         for entry in row:
             if entry[0] is 1:
-                aMatrix[i].append(black)
                 if entry[1] is 1: 
-                    bMatrix[i].append(black)
                     imageMatrix[i].append(colors[0])
                 else:
-                    bMatrix[i].append(white)
                     imageMatrix[i].append(colors[1])
             else:
-                aMatrix[i].append(white)
                 if entry[1] is 1:
-                    bMatrix[i].append(black)
                     imageMatrix[i].append(colors[2])
                 else:
-                    bMatrix[i].append(white)
                     imageMatrix[i].append(colors[3])
         i += 1
-    generateImage("a-channel", aMatrix)
-    generateImage("b-channel", bMatrix)
     return imageMatrix
 
 
