@@ -162,7 +162,7 @@ def runTest(name, test):
     print 'input matrix:'
     printMatrix(test)
     print 'Genearting Input Image...'
-    generateImage(name + '-input', generateBWMatrix(test))
+    generateImage(name + '-input.png', generateBWMatrix(test))
     print 'tuple matrix:'
     printMatrix(encode(test))
     print 'coded matrix:'
@@ -170,7 +170,7 @@ def runTest(name, test):
     print 'tuple matrix:'
     printMatrix(image2Matrix(generateColorMatrix(encode(test))))
     print 'Generating Output Image...'
-    generateImage(name + '-output', generateColorMatrix(encode(test)))
+    generateImage(name + '-output.png', generateColorMatrix(encode(test)))
 
     if encode(test) == image2Matrix(generateColorMatrix(encode(test))):
         print '\nOutput == Input!'
