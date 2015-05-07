@@ -25,7 +25,7 @@ from PIL import Image
 
 orange = (255,  125, 42)
 magenta = (255, 115, 255)
-lime = (115, 255, 82)
+lime = (150, 255, 82)
 teal = (25, 250, 250)
 
 black = (0, 0, 0)
