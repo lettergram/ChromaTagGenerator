@@ -25,7 +25,8 @@ from PIL import Image
 
 orange = (241, 125, 42)
 magenta = (200, 114, 239)
-lime = (90, 205, 86)
+# lime = (90, 205, 86)
+lime = (115, 255, 80)
 teal = (23, 249, 245)
 
 black = (0, 0, 0)
@@ -129,13 +130,13 @@ def generateColorMatrix(matrix):
     for row in matrix:
         imageMatrix.append([])
         for entry in row:
-            if entry[0] is 1:
-                if entry[1] is 1: 
+            if entry[0] is 0:
+                if entry[1] is 0:
                     imageMatrix[i].append(colors[0])
                 else:
                     imageMatrix[i].append(colors[1])
             else:
-                if entry[1] is 1:
+                if entry[1] is 0:
                     imageMatrix[i].append(colors[2])
                 else:
                     imageMatrix[i].append(colors[3])
@@ -189,12 +190,12 @@ runTest('#2', test2)
 
 apriltag36_11_12 = [[0,0,0,0,0,0,0,0,0,0],\
                     [0,1,1,1,1,1,1,1,1,0],\
-                    [0,1,1,0,1,1,1,1,1,0],\
-                    [0,1,0,0,0,1,0,1,1,0],\
-                    [0,1,1,1,0,1,1,0,1,0],\
-                    [0,1,1,0,1,1,0,0,1,0],\
-                    [0,1,1,1,0,1,0,1,1,0],\
-                    [0,1,1,0,0,1,0,1,1,0],\
+                    [0,1,1,1,1,1,0,1,1,0],\
+                    [0,1,1,0,1,0,0,0,1,0],\
+                    [0,1,0,1,1,0,1,1,1,0],\
+                    [0,1,0,0,1,1,0,1,1,0],\
+                    [0,1,1,0,1,0,1,1,1,0],\
+                    [0,1,1,0,1,0,0,1,1,0],\
                     [0,1,1,1,1,1,1,1,1,0],\
                     [0,0,0,0,0,0,0,0,0,0]]
 runTest('tag36_11_12', apriltag36_11_12)
