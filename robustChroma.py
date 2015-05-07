@@ -23,10 +23,10 @@ from PIL import Image
 # (0, 0) - (a-, b-) - teal = (23, 249, 255)
 
 
-orange = (255,  82, 0)
-magenta = (250, 115, 255)
-lime = (82, 255, 0)
-teal = (105, 250, 255)
+orange = (255,  125, 42)
+magenta = (255, 115, 255)
+lime = (115, 255, 82)
+teal = (25, 250, 250)
 
 black = (0, 0, 0)
 white = (255, 255, 255)
